@@ -1,7 +1,13 @@
 package ir.ac.kntu;
-
-public class Main {
+import javafx.application.Application;
+import javafx.stage.Stage;
+public class Main extends Application {
     public static void main(String[] args) {
-        // Write your code here
+        System.out.println("hi");
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        stage.show();
     }
 }
