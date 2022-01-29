@@ -48,18 +48,19 @@ public class Main extends Application {
 
     /**
      * Handles the frames and calls the update method
+     *
      * @return
      */
     private Parent contentAdder() {
         root.setPrefSize(600, 800);
         root.getChildren().add(player);
         AnimationTimer timer = new AnimationTimer() {
-            int frameCount =0;
+            int frameCount = 0;
 
             @Override
             public void handle(long l) {
-                if(!isLost) {
-                    if(frameCount%2==0) {
+                if (!isLost) {
+                    if (frameCount % 2 == 0) {
                         update();
                     }
                     frameCount++;
@@ -78,7 +79,7 @@ public class Main extends Application {
         root.getChildren().remove(text);
         root.getChildren().remove(score);
         text.setText("Your Hero's HP: " + player.getHp());
-        score.setText("Your Score is: "+ player.getScore());
+        score.setText("Your Score is: " + player.getScore());
         Image img = new Image("assets/heart.png");
         Rectangle health = new Rectangle(210, 8, 30, 30);
         health.setFill(new ImagePattern(img));
@@ -106,7 +107,7 @@ public class Main extends Application {
                             enemies.remove(s);
                             root.getChildren().remove(b);
                             bullets.remove(b);
-                            player.setScore(player.getScore()+10);
+                            player.setScore(player.getScore() + 10);
                         }
                     }
                     break;
@@ -121,17 +122,17 @@ public class Main extends Application {
 
             }
         }
-        for(BonusItem b: bonusItems){
-            if(b.getBoundsInParent().intersects(player.getBoundsInParent())){
+        for (BonusItem b : bonusItems) {
+            if (b.getBoundsInParent().intersects(player.getBoundsInParent())) {
                 bonusItems.remove(b);
                 root.getChildren().remove(b);
-                player.setHp(player.getHp()+1);
+                player.setHp(player.getHp() + 1);
             }
         }
         if (player.getHp() <= 0) {
             System.out.println("Game over");
             root.getChildren().remove(player);
-            isLost =true;
+            isLost = true;
 
         }
         for (Enemy e : enemies) {
@@ -150,6 +151,7 @@ public class Main extends Application {
 
     /**
      * main method of Main class, does nothing important :D
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -161,6 +163,7 @@ public class Main extends Application {
      * this method controls the movement of the player by getting keyboard inputs.
      * It also first sets the scene to the menu and then builds the game according to the difficulty lever
      * user chooses
+     *
      * @param stage
      */
     @Override
@@ -206,7 +209,7 @@ public class Main extends Application {
         easy.setFill(Color.TRANSPARENT);
         Rectangle medium = new Rectangle(98, 572, 404, 74);
         medium.setFill(Color.TRANSPARENT);
-        Rectangle hard = new Rectangle(98,698,404,74);
+        Rectangle hard = new Rectangle(98, 698, 404, 74);
         menuRoot.getChildren().add(easy);
         menuRoot.getChildren().add(medium);
         menuRoot.getChildren().add(hard);
@@ -214,9 +217,9 @@ public class Main extends Application {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                Enemy.enemyBuilder(root, Main.this, enemies,4);
+                Enemy.enemyBuilder(root, Main.this, enemies, 4);
                 stage.setScene(scene);
-                bonus.app=Main.this;
+                bonus.app = Main.this;
                 bonus.start();
 
             }
@@ -224,9 +227,9 @@ public class Main extends Application {
         medium.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                Enemy.enemyBuilder(root, Main.this, enemies,5);
+                Enemy.enemyBuilder(root, Main.this, enemies, 5);
                 stage.setScene(scene);
-                bonus.app=Main.this;
+                bonus.app = Main.this;
                 bonus.start();
 
             }
@@ -235,7 +238,7 @@ public class Main extends Application {
         hard.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                Enemy.enemyBuilder(root, Main.this, enemies,6);
+                Enemy.enemyBuilder(root, Main.this, enemies, 6);
                 stage.setScene(scene);
 
             }
@@ -255,7 +258,6 @@ public class Main extends Application {
     public Hero getPlayer() {
         return player;
     }
-
 
 
 }

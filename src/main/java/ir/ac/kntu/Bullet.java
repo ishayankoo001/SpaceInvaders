@@ -8,6 +8,7 @@ public class Bullet extends Rectangle {
 
     /**
      * Constructor of the bullet class
+     *
      * @param x
      * @param y
      * @param w

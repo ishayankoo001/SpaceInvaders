@@ -14,6 +14,7 @@ public class Enemy extends Rectangle {
 
     /**
      * Constructor of the enemy class
+     *
      * @param x
      * @param y
      * @param w
@@ -62,30 +63,33 @@ public class Enemy extends Rectangle {
 
     /**
      * Gets an array of enemies as input and moves all of them to left
+     *
      * @param enemies
      */
-    public static void moveAllToLeft(ArrayList<Enemy> enemies){
-        for(Enemy s:enemies){
+    public static void moveAllToLeft(ArrayList<Enemy> enemies) {
+        for (Enemy s : enemies) {
             s.moveLeft();
         }
     }
 
     /**
      * Gets an array of enemies and moves all of them to right
+     *
      * @param enemies
      */
-    public static void moveAllToRight(ArrayList<Enemy> enemies){
-        for(Enemy s:enemies){
+    public static void moveAllToRight(ArrayList<Enemy> enemies) {
+        for (Enemy s : enemies) {
             s.moveRight();
         }
     }
 
     /**
      * Gets an array of enemies and moves all of them down
+     *
      * @param enemies
      */
-    public static void moveAllDown(ArrayList<Enemy> enemies){
-        for(Enemy s:enemies){
+    public static void moveAllDown(ArrayList<Enemy> enemies) {
+        for (Enemy s : enemies) {
             s.moveDown();
         }
     }
@@ -93,12 +97,13 @@ public class Enemy extends Rectangle {
     /**
      * This method is used to handle the herd movement of the enemies, it pushes them right untill they hit the
      * screen limits, then it pushes them lefts and each time they hit the screen limit, it pushes them down a little.
+     *
      * @param main
      * @param enemies
      * @param time
      */
     public static void herdMove(Main main, ArrayList<Enemy> enemies, double time) {
-        if(time%6==0) {
+        if (time % 6 == 0) {
             for (Enemy s : enemies) {
                 if (s.getTranslateX() > 580) {
                     shouldMoveRight = false;
@@ -120,6 +125,7 @@ public class Enemy extends Rectangle {
 
     /**
      * This method is used to create enemies based on the difficulty level users choose
+     *
      * @param root
      * @param main
      * @param enemies

@@ -21,6 +21,7 @@ public class Hero extends Rectangle {
 
     /**
      * Constructor of the Hero class
+     *
      * @param x
      * @param y
      * @param w
@@ -42,6 +43,7 @@ public class Hero extends Rectangle {
     void moveLeft() {
         setTranslateX(getTranslateX() - 20);
     }
+
     /**
      * Moves the hero 20 pixels to right
      */
@@ -49,6 +51,7 @@ public class Hero extends Rectangle {
     void moveRight() {
         setTranslateX(getTranslateX() + 20);
     }
+
     /**
      * Moves the hero 20 pixels up
      */

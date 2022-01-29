@@ -11,8 +11,8 @@ public class Bonus extends Thread {
      */
     @Override
     public synchronized void start() {
-                BonusItem.appear(app.getRoot());
-            }
+        BonusItem.appear(app.getRoot());
+    }
 
 
 }
