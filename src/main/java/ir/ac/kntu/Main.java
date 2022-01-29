@@ -54,10 +54,15 @@ public class Main extends Application {
         root.setPrefSize(600, 800);
         root.getChildren().add(player);
         AnimationTimer timer = new AnimationTimer() {
+            int frameCount =0;
+
             @Override
             public void handle(long l) {
                 if(!isLost) {
-                    update();
+                    if(frameCount%2==0) {
+                        update();
+                    }
+                    frameCount++;
                 }
             }
         };
