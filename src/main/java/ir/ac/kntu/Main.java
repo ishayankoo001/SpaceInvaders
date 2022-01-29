@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Main extends Application {
     private Pane menuRoot = new Pane();
@@ -33,10 +34,22 @@ public class Main extends Application {
     private Hero player = new Hero(300, 700, 40, 40, 3);
     private Scene scene = new Scene(contentAdder());
     private ArrayList<Enemy> enemies = new ArrayList<>();
+
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
+
+    public void setBullets(ArrayList<Bullet> bullets) {
+        this.bullets = bullets;
+    }
+
     private ArrayList<Bullet> bullets = new ArrayList<>();
     static ArrayList<BonusItem> bonusItems = new ArrayList<>();
 
-
+    /**
+     * Handles the frames and calls the update method
+     * @return
+     */
     private Parent contentAdder() {
         root.setPrefSize(600, 800);
         root.getChildren().add(player);
@@ -52,6 +65,10 @@ public class Main extends Application {
         return root;
     }
 
+    /**
+     * The main method that refreshes the objects accordingly as time passes, and also
+     * handles the collisions between objects.
+     */
     private void update() {
         root.getChildren().remove(text);
         root.getChildren().remove(score);
@@ -126,13 +143,21 @@ public class Main extends Application {
 
     }
 
+    /**
+     * main method of Main class, does nothing important :D
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
-    public void gameOver(Stage stage){
-        stage.close();
-    }
 
+    /**
+     * start method is overrode as the Main class inherits Application class,
+     * this method controls the movement of the player by getting keyboard inputs.
+     * It also first sets the scene to the menu and then builds the game according to the difficulty lever
+     * user chooses
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         Image menuImg = new Image("assets/menu.jpg");
@@ -217,52 +242,15 @@ public class Main extends Application {
         stage.show();
     }
 
-    public Scene getScene() {
-        return scene;
-    }
-
-
-    public void setScene(Scene scene) {
-        this.scene = scene;
-    }
 
     public Pane getRoot() {
         return root;
-    }
-
-    public void setRoot(Pane root) {
-        this.root = root;
     }
 
     public Hero getPlayer() {
         return player;
     }
 
-    public void setPlayer(Hero player) {
-        this.player = player;
-    }
 
-    public ArrayList<Enemy> getEnemies() {
-        return enemies;
-    }
 
-    public void setEnemies(ArrayList<Enemy> enemies) {
-        this.enemies = enemies;
-    }
-
-    public ArrayList<Bullet> getBullets() {
-        return bullets;
-    }
-
-    public void setBullets(ArrayList<Bullet> bullets) {
-        this.bullets = bullets;
-    }
-
-    public Bonus getBonus() {
-        return bonus;
-    }
-
-    public void setBonus(Bonus bonus) {
-        this.bonus = bonus;
-    }
 }

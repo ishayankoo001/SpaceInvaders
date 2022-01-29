@@ -13,6 +13,10 @@ public class BonusItem extends Rectangle{
         super(v, v1, v2, v3);
     }
 
+    /**
+     * this makes one bonus item appear in the game, and it would increase the hp of player by one point
+     * @param pane
+     */
     public static void appear(Pane pane){
         Random r = new Random();
         int low = 10;
