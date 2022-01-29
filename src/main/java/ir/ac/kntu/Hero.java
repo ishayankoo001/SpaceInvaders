@@ -1,6 +1,8 @@
 package ir.ac.kntu;
 
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class Hero extends Rectangle {
@@ -22,6 +24,8 @@ public class Hero extends Rectangle {
         setTranslateX(x);
         setTranslateY(y);
         this.hp = hp;
+        Image img = new Image("assets/spaceship.png");
+        this.setFill(new ImagePattern(img));
     }
 
     void moveLeft() {
