@@ -24,13 +24,18 @@ import java.util.ArrayList;
 public class Main extends Application {
     private Pane menuRoot = new Pane();
     private Pane root = new Pane();
+    private Bonus bonus = new Bonus();
+    private boolean isLost = false;
     private double time = 0;
     private double time2 = 0;
     Text text = new Text();
+    Text score = new Text();
     private Hero player = new Hero(300, 700, 40, 40, 3);
     private Scene scene = new Scene(contentAdder());
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private ArrayList<Bullet> bullets = new ArrayList<>();
+    static ArrayList<BonusItem> bonusItems = new ArrayList<>();
+
 
     private Parent contentAdder() {
         root.setPrefSize(600, 800);
@@ -38,7 +43,9 @@ public class Main extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                update();
+                if(!isLost) {
+                    update();
+                }
             }
         };
         timer.start();
@@ -47,7 +54,9 @@ public class Main extends Application {
 
     private void update() {
         root.getChildren().remove(text);
+        root.getChildren().remove(score);
         text.setText("Your Hero's HP: " + player.getHp());
+        score.setText("Your Score is: "+ player.getScore());
         Image img = new Image("assets/heart.png");
         Rectangle health = new Rectangle(210, 8, 30, 30);
         health.setFill(new ImagePattern(img));
@@ -57,6 +66,11 @@ public class Main extends Application {
         text.setX(10);
         text.setY(30);
         root.getChildren().add(text);
+        score.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        score.setFill(Color.ANTIQUEWHITE);
+        score.setX(10);
+        score.setY(60);
+        root.getChildren().add(score);
         time += 0.016;
         time2 += 0.25;
         Enemy.herdMove(this, enemies, time2);
@@ -70,6 +84,7 @@ public class Main extends Application {
                             enemies.remove(s);
                             root.getChildren().remove(b);
                             bullets.remove(b);
+                            player.setScore(player.getScore()+10);
                         }
                     }
                     break;
@@ -84,9 +99,18 @@ public class Main extends Application {
 
             }
         }
-        if (player.getHp() < 0) {
+        for(BonusItem b: bonusItems){
+            if(b.getBoundsInParent().intersects(player.getBoundsInParent())){
+                bonusItems.remove(b);
+                root.getChildren().remove(b);
+                player.setHp(player.getHp()+1);
+            }
+        }
+        if (player.getHp() <= 0) {
             System.out.println("Game over");
             root.getChildren().remove(player);
+            isLost =true;
+
         }
         for (Enemy e : enemies) {
             if (time > 2) {
@@ -104,7 +128,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        System.out.println("hi");
+    }
+    public void gameOver(Stage stage){
+        stage.close();
     }
 
     @Override
@@ -157,17 +183,21 @@ public class Main extends Application {
         easy.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                Enemy.enemyBuilder(root, Main.this, enemies);
-                stage.setScene(scene);
 
+                Enemy.enemyBuilder(root, Main.this, enemies,4);
+                stage.setScene(scene);
+                bonus.app=Main.this;
+                bonus.start();
 
             }
         });
         medium.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                Enemy.enemyBuilder(root, Main.this, enemies);
+                Enemy.enemyBuilder(root, Main.this, enemies,5);
                 stage.setScene(scene);
+                bonus.app=Main.this;
+                bonus.start();
 
             }
         });
@@ -175,7 +205,7 @@ public class Main extends Application {
         hard.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                Enemy.enemyBuilder(root, Main.this, enemies);
+                Enemy.enemyBuilder(root, Main.this, enemies,6);
                 stage.setScene(scene);
 
             }
@@ -226,5 +256,13 @@ public class Main extends Application {
 
     public void setBullets(ArrayList<Bullet> bullets) {
         this.bullets = bullets;
+    }
+
+    public Bonus getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(Bonus bonus) {
+        this.bonus = bonus;
     }
 }

@@ -76,33 +76,33 @@ public class Enemy extends Rectangle {
 
     }
 
-    public static void enemyBuilder(Pane root, Main main, ArrayList<Enemy> enemies) {
-        for (int i = 0; i < 5; i++) {
-            Enemy e = new Enemy(90 + i * 100, 150, 30, 30, Color.RED);
+    public static void enemyBuilder(Pane root, Main main, ArrayList<Enemy> enemies, int level) {
+        for (int i = 0; i < level; i++) {
+            Enemy e = new Enemy(60 + i * 100, 150, 30, 30, Color.RED);
             e.app = main;
             root.getChildren().add(e);
             enemies.add(e);
         }
-        for (int i = 0; i < 5; i++) {
-            Enemy e = new Enemy(90 + i * 100, 200, 30, 30, Color.RED);
+        for (int i = 0; i < level; i++) {
+            Enemy e = new Enemy(60 + i * 100, 200, 30, 30, Color.RED);
             e.app = main;
             root.getChildren().add(e);
             enemies.add(e);
         }
-        for (int i = 0; i < 5; i++) {
-            Enemy e = new Enemy(90 + i * 100, 250, 30, 30, Color.RED);
+        for (int i = 0; i < level; i++) {
+            Enemy e = new Enemy(60 + i * 100, 250, 30, 30, Color.RED);
             e.app = main;
             root.getChildren().add(e);
             enemies.add(e);
         }
-        for (int i = 0; i < 5; i++) {
-            Enemy e = new Enemy(90 + i * 100, 300, 30, 30, Color.RED);
+        for (int i = 0; i < level; i++) {
+            Enemy e = new Enemy(60 + i * 100, 300, 30, 30, Color.RED);
             e.app = main;
             root.getChildren().add(e);
             enemies.add(e);
         }
-        for (int i = 0; i < 5; i++) {
-            Enemy e = new Enemy(90 + i * 100, 350, 30, 30, Color.RED);
+        for (int i = 0; i < level; i++) {
+            Enemy e = new Enemy(60 + i * 100, 350, 30, 30, Color.RED);
             e.app = main;
             root.getChildren().add(e);
             enemies.add(e);

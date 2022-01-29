@@ -18,6 +18,7 @@ public class Hero extends Rectangle {
     }
 
     private int hp;
+    private int score = 0;
 
     Hero(int x, int y, int w, int h, int hp) {
         super(w, h);
@@ -51,5 +52,13 @@ public class Hero extends Rectangle {
         app.getBullets().add(b);
 
 
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }
