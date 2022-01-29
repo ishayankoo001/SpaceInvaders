@@ -2,10 +2,12 @@ package ir.ac.kntu;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -20,6 +22,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Main extends Application {
+    private Pane menuRoot = new Pane();
     private Pane root = new Pane();
     private double time = 0;
     private double time2 = 0;
@@ -106,6 +109,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        Image menuImg = new Image("assets/menu.jpg");
+        BackgroundImage menuBImg = new BackgroundImage(menuImg,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        Background menuBGround = new Background(menuBImg);
+        menuRoot.setBackground(menuBGround);
+        Scene menuScene = new Scene(menuRoot);
         Image img = new Image("assets/background.jpg");
         BackgroundImage bImg = new BackgroundImage(img,
                 BackgroundRepeat.NO_REPEAT,
@@ -134,8 +146,44 @@ public class Main extends Application {
                     break;
             }
         });
-        Enemy.enemyBuilder(root, this, enemies);
-        stage.setScene(scene);
+        Rectangle easy = new Rectangle(98, 443, 404, 74);
+        easy.setFill(Color.TRANSPARENT);
+        Rectangle medium = new Rectangle(98, 572, 404, 74);
+        medium.setFill(Color.TRANSPARENT);
+        Rectangle hard = new Rectangle(98,698,404,74);
+        menuRoot.getChildren().add(easy);
+        menuRoot.getChildren().add(medium);
+        menuRoot.getChildren().add(hard);
+        easy.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Enemy.enemyBuilder(root, Main.this, enemies);
+                stage.setScene(scene);
+
+
+            }
+        });
+        medium.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Enemy.enemyBuilder(root, Main.this, enemies);
+                stage.setScene(scene);
+
+            }
+        });
+        hard.setFill(Color.TRANSPARENT);
+        hard.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Enemy.enemyBuilder(root, Main.this, enemies);
+                stage.setScene(scene);
+
+            }
+        });
+
+        stage.setScene(menuScene);
+        stage.setHeight(800);
+        stage.setWidth(600);
         stage.show();
     }
 
